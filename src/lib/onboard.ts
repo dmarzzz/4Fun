@@ -17,7 +17,7 @@ const chains = [
 ]
 
 const appMetadata = {
-  name: "SlotZ ViZ",
+  name: "dmarz",
   icon: `<svg width="248" height="248" viewBox="0 0 248 248" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_817_359)">
 <rect x="33" y="29" width="182" height="182" rx="6" fill="url(#paint0_linear_817_359)"/>

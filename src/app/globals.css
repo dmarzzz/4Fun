@@ -111,3 +111,11 @@ body {
     animation: rotate-bounce 2s infinite;
   }
 }
+
+pre { 
+  font-family: monospace;
+  font-size: 1em;
+  line-height: 1.1;
+  -webkit-text-size-adjust: none;
+}
+

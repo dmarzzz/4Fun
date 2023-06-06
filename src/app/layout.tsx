@@ -30,8 +30,8 @@ const majorMono = Fira_Code({
 })
 
 export const metadata = {
-  title: "SlotZ ViZ",
-  description: "See a slot don't be a slot.",
+  title: "dmarz",
+  description: "machines and markets",
 }
 
 export default function RootLayout({
