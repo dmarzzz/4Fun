@@ -31,6 +31,8 @@
   --w3o-foreground-color: #ffffff00;
   --w3o-action-color: #f80b52;
   --w3o-border-color: #ffffff;
+  /* --background-start-rgb: #000; 
+  --background-end-rgb:  #17FFFF; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,6 +40,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 7, 1, 20;
     --background-end-rgb: 10, 254, 151;
+    /* --background-start-rgb:#000; 
+    --background-end-rgb: #17FFFF; */
   }
 }
 
@@ -114,8 +118,121 @@ body {
 
 pre { 
   font-family: monospace;
-  font-size: 1em;
   line-height: 1.1;
   -webkit-text-size-adjust: none;
+  font-size: 1.0em; 
 }
 
+
+
+.cube-text {
+  font-size: 1.5em; 
+}
+
+.folder-structure {
+  font-size: 1.0em; 
+}
+
+
+.scene {
+  width: 200px;
+  height: 200px;
+  perspective: 600px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-30deg) rotateY(45deg);
+  animation: rotate 5s infinite linear;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.front  { transform: translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+@keyframes rotate {
+  from { transform: rotateX(-30deg) rotateY(45deg); }
+  to { transform: rotateX(-30deg) rotateY(405deg); }
+}
+
+
+.neon-glow {
+  color: #A5F2F3;
+  text-shadow: 0 0 5px #A5F2F3, 0 0 10px #A5F2F3, 0 0 15px #FF43A4, 0 0 20px #FF43A4, 0 0 25px #FF43A4, 0 0 30px #FF43A4, 0 0 35px #FF43A4;
+  font-size: 1.0em;
+  animation: flickerAnimation 1.5s infinite;
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.floating-image1 {
+  position: absolute;
+  width: 200px;
+  animation: floatAnimation1 8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  top: 20%;
+  left: 20%;
+}
+
+.floating-image2 {
+  position: absolute;
+  width: 200px;
+  animation: floatAnimation2 12s ease-in-out infinite;
+  top: 20%;
+  right: 20%;
+}
+
+
+@keyframes floatAnimation1 {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10vh) translateX(10vw);
+  }
+  50% {
+    transform: translateY(10vh) translateX(20vw);
+  }
+  75% {
+    transform: translateY(20vh) translateX(-10vw);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes floatAnimation2 {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-12vh) translateX(12vw);
+  }
+  50% {
+    transform: translateY(12vh) translateX(22vw);
+  }
+  75% {
+    transform: translateY(22vh) translateX(-12vw);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}

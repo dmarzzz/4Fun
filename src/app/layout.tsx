@@ -42,11 +42,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${majorMono.className} relative`}>
       <body
-        // style={{
-        //   background:
-        //     "radial-gradient(140% 107.13% at 50% 10%,rgb(7 1 20) 37.41%,#63e 69.27%,#fff 100%)",
-        // }}
-        className=" bg-bold-dark bg-gradient-to-tr from-[#d7269320] via-transparent to-[#0AFE9720]"
+// style={{
+//   background:
+//     "radial-gradient(140% 107.13% at 50% 10%,rgb(7 1 20) 37.41%,#0ff 69.27%,#fff 100%)",
+// }}
+        // className=" bg-bold-dark bg-gradient-to-tr from-[#d7269320] via-transparent to-[#0AFE9720]"
       >
         <Providers>{children}</Providers>
       </body>
