@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import Cube from '../../components/Cube';
+import Cube from '../../components/Cube1';
 import MovieReviews from "@/components/MovieReviews";
 
 
