@@ -134,43 +134,10 @@ pre {
 }
 
 
-.scene {
-  width: 200px;
-  height: 200px;
-  perspective: 600px;
-}
 
-.cube {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: rotateX(-30deg) rotateY(45deg);
-  animation: rotate 5s infinite linear;
-}
-
-.face {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 1px solid #ccc;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
-}
-
-.front  { transform: translateZ(100px); }
-.back   { transform: rotateY(180deg) translateZ(100px); }
-.left   { transform: rotateY(-90deg) translateZ(100px); }
-.right  { transform: rotateY(90deg) translateZ(100px); }
-.top    { transform: rotateX(90deg) translateZ(100px); }
-.bottom { transform: rotateX(-90deg) translateZ(100px); }
-
-@keyframes rotate {
-  from { transform: rotateX(-30deg) rotateY(45deg); }
-  to { transform: rotateX(-30deg) rotateY(405deg); }
-}
-
-
+/* ------------------------------------------------- */
+ /* Main Page */
+ /* ------------------------------------------------- */
 .neon-glow {
   color: #A5F2F3;
   text-shadow: 0 0 5px #A5F2F3, 0 0 10px #A5F2F3, 0 0 15px #FF43A4, 0 0 20px #FF43A4, 0 0 25px #FF43A4, 0 0 30px #FF43A4, 0 0 35px #FF43A4;
@@ -188,16 +155,16 @@ pre {
   position: absolute;
   width: 200px;
   animation: floatAnimation1 8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-  top: 20%;
-  left: 20%;
+  top: 30%;
+  left: 15%;
 }
 
 .floating-image2 {
   position: absolute;
   width: 200px;
   animation: floatAnimation2 12s ease-in-out infinite;
-  top: 20%;
-  right: 20%;
+  top: 30%;
+  right: 15%;
 }
 
 
@@ -235,4 +202,131 @@ pre {
   100% {
     transform: translateY(0) translateX(0);
   }
+}
+
+/* ------------------------------------------------- */
+ /* About Page */
+ /* ------------------------------------------------- */
+
+ .about-paragraph-container {
+  text-align: center;
+  padding: 1em; /* You can adjust this padding as needed */
+}
+
+.about-paragraph {
+  margin: 0 auto; /* Centers the block horizontally */
+  max-width: 400px; /* Adjust the max-width as per your needs */
+  font-size: 0.75em; /* Adjust font-size as needed, using relative units like em or rem */
+  line-height: 1.6; /* Optional: improves readability */
+  padding: 1em; /* Optional: add some padding */
+}
+
+.about-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-list li::before {
+  margin-right: 8px;
+}
+
+
+ /* 3D rorating Cube */
+
+ .scene {
+  width: 200px;
+  height: 200px;
+  perspective: 600px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: explode 3s linear forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: rotateX(-30deg) rotateY(45deg) translateZ(0);
+  }
+  50% {
+    transform: rotateX(-30deg) rotateY(45deg) translateZ(800px);
+  }
+  100% {
+    transform: rotateX(1080deg) rotateY(855deg) translateZ(-1000px);
+  }
+}
+
+.rotating {
+  animation: rotate 5s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateX(-30deg) rotateY(45deg) translateZ(0);
+  }
+  to {
+    transform: rotateX(-30deg) rotateY(405deg) translateZ(0);
+  }
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.front {
+  transform: translateZ(100px);
+  background: linear-gradient(135deg, #ff0000, #ffff00);
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(100px);
+  background: linear-gradient(45deg, #00ff00, #00ffff);
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(100px);
+  background: linear-gradient(90deg, #0000ff, #ff00ff);
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(100px);
+  background: linear-gradient(225deg, #0000ff, #00ff00);
+}
+
+.top {
+  transform: rotateX(90deg) translateZ(100px);
+  background: linear-gradient(180deg, #ff00ff, #0000ff);
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+  background: linear-gradient(315deg, #ffff00, #ff0000);
+}
+
+.movie-reviews {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.movie-reviews p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.movie-reviews pre {
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+  font-size: 0.8em;
+  border: 1px solid;
+  padding: 10px;
 }

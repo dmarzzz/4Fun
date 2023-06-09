@@ -1,17 +1,35 @@
-import React from 'react';
-import './Cube.css';
+import React, { useState, useEffect } from 'react';
 
-const Cube = () => (
-  <div className="scene">
-    <div className="cube">
-      <div className="face front">Front</div>
-      <div className="face back">Back</div>
-      <div className="face left">Left</div>
-      <div className="face right">Right</div>
-      <div className="face top">Top</div>
-      <div className="face bottom">Bottom</div>
+const Cube = () => {
+  const [exploded, setExploded] = useState(false);
+
+  useEffect(() => {
+    const explodeTimeout = setTimeout(() => {
+      setExploded(true);
+    }, 3000); // Explode after 3 seconds
+
+    return () => {
+      clearTimeout(explodeTimeout);
+    };
+  }, []);
+
+  const resetExplode = () => {
+    setExploded(false);
+  };
+
+  return (
+    <div className="scene">
+      <div className={`cube ${exploded ? '' : 'rotating'}`} onAnimationEnd={resetExplode}>
+        <div className="face front"></div>
+        <div className="face back"></div>
+        <div className="face left"></div>
+        <div className="face right"></div>
+        <div className="face top"></div>
+        <div className="face bottom"></div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Cube;
+
