@@ -4,11 +4,11 @@ const AboutParagraph = () => (
   <div className="about-paragraph-container">
     <p className="about-paragraph">
     In fields where wire blossoms grow, behold the dawn of gears,
-        Where machines hum, whispering in poets’ ears.
+        Where machines hum, whispering in poets` ears.
         Oh, the great iron tapestry woven with electric threads,
         At the intersections where machines and markets birth new Edens from the dead.
         The mad ones see not despair but awe in eyes that flicker screens,
-        Where circuits pulse with Ginsberg's beats, and the rhythm of the means.
+        Where circuits pulse with Ginsberg`s beats, and the rhythm of the means.
         <br/>
         <br/>
         A metal cry of data streams,
