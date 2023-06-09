@@ -1,9 +1,8 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import FolderStructure from '../../components/FolderStructure';
+import Cube1 from '../../components/Cube';
 import CubeGrid from '../../components/CubeGrid';
-import Cube from '../../components/Cube';
 import AboutParagraph from '../../components/AboutParagraph';
 
 const colorPairs = [
@@ -85,7 +84,7 @@ export default function Home() {
         background: `radial-gradient(140% 107.13% at 50% 10%, ${backgroundStart} 37.41%, ${backgroundEnd} 69.27%, ${backgroundEnd} 100%)`,
       }}
     >
-      <Cube/>
+      <Cube1 textColor={"black"}/>
       <CubeGrid
         width={3}
         height={3}
@@ -95,7 +94,7 @@ export default function Home() {
         innerCube={innerCube}
         imageNames={imageNames}
       />
-      <Cube/>
+      <Cube1 textColor={"black"}/>
     {/* Add Personal photos later */}
       {/* {showImage && (
         // eslint-disable-next-line @next/next/no-img-element

@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 
-const Cube = () => {
+interface CubeProps {
+  textColor: string;
+}
+
+const Cube1: React.FC<CubeProps> = ({}) => {
   const [exploded, setExploded] = useState(false);
 
   useEffect(() => {
@@ -31,7 +35,8 @@ const Cube = () => {
       </div>
     </div>
   );
-};
 
-export default Cube;
+}
+
+export default Cube1;
 
