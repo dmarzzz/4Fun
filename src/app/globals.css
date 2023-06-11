@@ -138,6 +138,28 @@ pre {
 /* ------------------------------------------------- */
  /* Main Page */
  /* ------------------------------------------------- */
+ main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* Use media queries for smaller screens */
+@media (max-width: 768px) {
+  .cube-text {
+    font-size: 1em; /* Scale down cube text size for small screens */
+  }
+  
+  .floating-image1,
+  .floating-image2 {
+    width: 25vw; /* Use viewport width units for images */
+  }
+}
+
 .neon-glow {
   color: #A5F2F3;
   text-shadow: 0 0 5px #A5F2F3, 0 0 10px #A5F2F3, 0 0 15px #FF43A4, 0 0 20px #FF43A4, 0 0 25px #FF43A4, 0 0 30px #FF43A4, 0 0 35px #FF43A4;
