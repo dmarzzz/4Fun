@@ -15,7 +15,7 @@ const AboutParagraph = () => (
 Unwavering Optimist, with your chrome-plated heart and binary mind,
 Threading steel and spirit, so this machine-man’s soul can bind,
 As we navigate the digital surge, our collective dreams take flight,
-uniting flesh and circuit in the dawn's emerging light
+uniting flesh and circuit in the dawn’s emerging light.
     </p>
     <ul className="about-list">
       <li><a href="https://twitter.com/_danielmarzec"> &#x2B50; twitter :) </a></li>
