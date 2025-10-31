@@ -1,13 +1,10 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import Cube1 from '../../components/Cube1';
 import CubeGrid from '../../components/CubeGrid';
 import AboutParagraph from '../../components/AboutParagraph';
 
-const colorPairs = [
-  { backgroundStart: "#000", backgroundEnd: "#000", topTextColor: "#F73A8F", bottomTextColor: "#F73A8F" },
-];
+const aboutTextColor = "#F73A8F";
 
 const imageNames = ['floater1.png', 'floater2.png', 'floater3.png','floater4.png', 'floater5.png', 'floater6.png'];
 
@@ -37,13 +34,12 @@ const innerCube = [
 
 export default function Home() {
   const [flickerRate, setFlickerRate] = useState(1000);
-  const [colorPair, setColorPair] = useState(colorPairs[0]);
   const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowImage(true);
-    }, 20000); // 60 seconds
+    }, 100000); // Delay appearance by ~100s for calmer pacing
     return () => clearTimeout(timer);
   }, []);
 
@@ -52,11 +48,6 @@ export default function Home() {
       setFlickerRate(50 + (Math.random() * 50));
     }, 20000);
     return () => clearInterval(flickerInterval);
-  }, []);
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * colorPairs.length);
-    setColorPair(colorPairs[randomIndex]);
   }, []);
 
   const [randomX, setRandomX] = useState(0);
@@ -70,31 +61,29 @@ export default function Home() {
       setRandomY(Math.random());
       setRandomImageIndex(Math.floor(Math.random() * imageNames.length)); // Corrected line
       setRandomImageIndex2(Math.floor(Math.random() * imageNames.length)); // Corrected line
-    }, 10000); // Change image and position every 10 seconds
+    }, 50000); // Change image and position every 50 seconds
 
     return () => clearInterval(imageInterval);
 }, []);
 
-  const { backgroundStart, backgroundEnd, topTextColor, bottomTextColor  } = colorPair;
-
   return (
     <main
-      className="flex flex-row items-center justify-center h-screen min-h-screen p-6 overflow-y-auto"
+      className="flex flex-col items-center min-h-screen w-full p-4 md:p-6 overflow-y-auto"
       style={{
-        background: `radial-gradient(140% 107.13% at 50% 10%, ${backgroundStart} 37.41%, ${backgroundEnd} 69.27%, ${backgroundEnd} 100%)`,
+        backgroundColor: "#000",
       }}
     >
-      <Cube1 textColor={"black"}/>
       <CubeGrid
         width={3}
         height={3}
         centerComponent={<AboutParagraph />}
-        colorPairs={colorPairs}
         cube={cube}
         innerCube={innerCube}
-        imageNames={imageNames}
+        textColor={aboutTextColor}
+        fitToViewport={false}
+        centerLayout="full-width"
+        showMiddleRowCubes={false}
       />
-      <Cube1 textColor={"black"}/>
     {/* Add Personal photos later */}
       {/* {showImage && (
         // eslint-disable-next-line @next/next/no-img-element
@@ -128,5 +117,3 @@ export default function Home() {
   );
   
 }
-
-

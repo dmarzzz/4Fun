@@ -45,6 +45,13 @@
   }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 body {
   color: #ffffff;
   /* color: rgb(var(--foreground-rgb)); */
@@ -126,11 +133,12 @@ pre {
 
 
 .cube-text {
-  font-size: 1.5em; 
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  line-height: 1.1;
 }
 
 .folder-structure {
-  font-size: 1.0em; 
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
 }
 
 
@@ -138,22 +146,17 @@ pre {
 /* ------------------------------------------------- */
  /* Main Page */
  /* ------------------------------------------------- */
- main {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 
 /* Use media queries for smaller screens */
 @media (max-width: 768px) {
-  .cube-text {
-    font-size: 1em; /* Scale down cube text size for small screens */
-  }
-  
   .floating-image1,
   .floating-image2 {
     width: 25vw; /* Use viewport width units for images */
@@ -163,7 +166,7 @@ pre {
 .neon-glow {
   color: #A5F2F3;
   text-shadow: 0 0 5px #A5F2F3, 0 0 10px #A5F2F3, 0 0 15px #FF43A4, 0 0 20px #FF43A4, 0 0 25px #FF43A4, 0 0 30px #FF43A4, 0 0 35px #FF43A4;
-  font-size: 1.0em;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
   animation: flickerAnimation 1.5s infinite;
 }
 
@@ -237,10 +240,10 @@ pre {
 
 .about-paragraph {
   margin: 0 auto; /* Centers the block horizontally */
-  max-width: 400px; /* Adjust the max-width as per your needs */
-  font-size: 0.75em; /* Adjust font-size as needed, using relative units like em or rem */
-  line-height: 1.6; /* Optional: improves readability */
-  padding: 1em; /* Optional: add some padding */
+  max-width: min(70ch, 90vw);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.7; /* Optional: improves readability */
+  padding: 1.5em; /* Optional: add some padding */
 }
 
 .about-list {

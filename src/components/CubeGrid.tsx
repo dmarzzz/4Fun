@@ -1,35 +1,34 @@
 // CubeGrid.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import RotatingCube from './RotatingCube';
 
 type CubeGridProps = {
   width: number,
   height: number,
   centerComponent: JSX.Element,
-  colorPairs: any[],
   cube: string[],
   innerCube: string[],
-  imageNames: string[],
+  textColor: string,
+  fitToViewport?: boolean,
+  centerLayout?: 'single-cell' | 'full-width',
+  showMiddleRowCubes?: boolean,
 };
 
-const CubeGrid: React.FC<CubeGridProps> = ({ width, height, centerComponent, colorPairs, cube, innerCube, imageNames }) => {
-
+const CubeGrid: React.FC<CubeGridProps> = ({
+  width,
+  height,
+  centerComponent,
+  cube,
+  innerCube,
+  textColor,
+  fitToViewport = true,
+  centerLayout = 'single-cell',
+  showMiddleRowCubes = true,
+}) => {
   const [rotation, setRotation] = useState(0);
   const [innerRotation, setInnerRotation] = useState(0);
-  const [flickerRate, setFlickerRate] = useState(1000);
-  const [colorPair, setColorPair] = useState(colorPairs[0]);
-  const [showImage, setShowImage] = useState(false);
-  const [randomX, setRandomX] = useState(0);
-  const [randomY, setRandomY] = useState(0);
-  const [randomImageIndex, setRandomImageIndex] = useState(0);
-  const [randomImageIndex2, setRandomImageIndex2] = useState(1);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowImage(true);
-    }, 20000);
-    return () => clearTimeout(timer);
-  }, []);
+  const [scale, setScale] = useState(1);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -40,27 +39,39 @@ const CubeGrid: React.FC<CubeGridProps> = ({ width, height, centerComponent, col
   }, [cube, innerCube]);
 
   useEffect(() => {
-    const flickerInterval = setInterval(() => {
-      setFlickerRate(50 + (Math.random() * 50));
-    }, 20000);
-    return () => clearInterval(flickerInterval);
-  }, []);
+    if (!fitToViewport) {
+      setScale(1);
+      return;
+    }
 
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * colorPairs.length);
-    setColorPair(colorPairs[randomIndex]);
-  }, []);
+    const updateScale = () => {
+      const contentEl = contentRef.current;
+      if (!contentEl) return;
+      const parentEl = contentEl.parentElement;
+      if (!parentEl) return;
 
-  useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setRandomX(Math.random());
-      setRandomY(Math.random());
-      setRandomImageIndex(Math.floor(Math.random() * imageNames.length));
-      setRandomImageIndex2(Math.floor(Math.random() * imageNames.length));
-    }, 10000);
+      const parentWidth = parentEl.clientWidth;
+      const parentHeight = parentEl.clientHeight;
+      const contentWidth = contentEl.scrollWidth;
+      const contentHeight = contentEl.scrollHeight;
 
-    return () => clearInterval(imageInterval);
-  }, []);
+      if (!parentWidth || !parentHeight || !contentWidth || !contentHeight) return;
+
+      const scaleX = parentWidth / contentWidth;
+      const scaleY = parentHeight / contentHeight;
+      const nextScale = Math.min(scaleX, scaleY, 1);
+      const adjustedScale = nextScale < 1 ? Math.max(nextScale, 0.85) : 1;
+
+      setScale(prev => (Math.abs(prev - adjustedScale) > 0.01 ? adjustedScale : prev));
+    };
+
+    updateScale();
+    window.addEventListener('resize', updateScale);
+
+    return () => {
+      window.removeEventListener('resize', updateScale);
+    };
+  }, [width, height, cube, innerCube, fitToViewport]);
 
   if (width % 2 === 0 || height % 2 === 0) {
     return <div>Width and Height must be odd numbers!</div>;
@@ -69,27 +80,71 @@ const CubeGrid: React.FC<CubeGridProps> = ({ width, height, centerComponent, col
   const middleRowIndex = Math.floor(height / 2);
   const middleColIndex = Math.floor(width / 2);
 
-  const { topTextColor } = colorPair;
+  const wrapperClasses = fitToViewport
+    ? "flex h-full w-full flex-1 items-center justify-center overflow-hidden"
+    : "flex w-full max-w-full justify-center items-start";
+
+  const gridStyle: React.CSSProperties = {
+    gridTemplateRows: `repeat(${height}, auto)`,
+    gridTemplateColumns: `repeat(${width}, auto)`,
+    ...(fitToViewport
+      ? {
+          transform: `scale(${scale})`,
+          transformOrigin: 'center',
+        }
+      : {}),
+  };
 
   return (
-    <div className="grid items-center justify-center h-screen p-6 gap-4"
-         style={{
-           gridTemplateRows: `repeat(${height}, auto)`,
-           gridTemplateColumns: `repeat(${width}, auto)`
-         }}>
-      {Array.from({ length: height }).map((_, rowIndex) =>
-        Array.from({ length: width }).map((_, colIndex) => {
-          if (rowIndex === middleRowIndex && colIndex === middleColIndex) {
-            return <div key={`${rowIndex}-${colIndex}`}>{centerComponent}</div>;
-          }
-          return (
-            <div key={`${rowIndex}-${colIndex}`} className="flex flex-col items-center justify-center">
-              <RotatingCube cube={innerCube} rotation={innerRotation} textColor={topTextColor} />
-              <RotatingCube cube={cube} rotation={rotation} textColor={topTextColor} />
-            </div>
-          );
-        })
-      )}
+    <div className={wrapperClasses}>
+      <div
+        ref={contentRef}
+        className="grid items-center justify-center gap-2 md:gap-4 p-4 md:p-6 max-w-full"
+        style={gridStyle}
+      >
+        {Array.from({ length: height }).map((_, rowIndex) =>
+          Array.from({ length: width }).map((_, colIndex) => {
+            const isMiddleRow = rowIndex === middleRowIndex;
+            const isMiddleCol = colIndex === middleColIndex;
+
+            if (isMiddleRow) {
+              if (centerLayout === 'full-width') {
+                if (colIndex === 0) {
+                  return (
+                    <div
+                      key={`${rowIndex}-${colIndex}`}
+                      className="flex w-full justify-center"
+                      style={{ gridColumn: `1 / span ${width}` }}
+                    >
+                      {centerComponent}
+                    </div>
+                  );
+                }
+                return null;
+              }
+
+              if (isMiddleCol) {
+                return (
+                  <div key={`${rowIndex}-${colIndex}`}>
+                    {centerComponent}
+                  </div>
+                );
+              }
+
+              if (!showMiddleRowCubes) {
+                return <div key={`${rowIndex}-${colIndex}`} />;
+              }
+            }
+
+            return (
+              <div key={`${rowIndex}-${colIndex}`} className="flex flex-col items-center justify-center">
+                <RotatingCube cube={innerCube} rotation={innerRotation} textColor={textColor} />
+                <RotatingCube cube={cube} rotation={rotation} textColor={textColor} />
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
