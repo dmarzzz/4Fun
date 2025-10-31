@@ -19,7 +19,7 @@ const FolderStructure: React.FC<FolderStructureProps> = ({ flickerRate }) => {
               <li> <a href="/about"> <p>cause_areas.html </p> </a> </li>
             </ul> */}
           </li>
-          <li className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[60px] before:-left-3 before:w-3 before:h-[73px] border-white">
+          <li className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[83px] before:-left-3 before:w-3 before:h-[95px] border-white">
             writing/
             <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
               <li><a href="https://hackmd.io/@dmarz" target="_blank" rel="noopener noreferrer">🔗 hackMd</a></li>
@@ -27,9 +27,21 @@ const FolderStructure: React.FC<FolderStructureProps> = ({ flickerRate }) => {
             <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
               <li><a href="https://github.com/dmarzzz" target="_blank" rel="noopener noreferrer">🔗 github</a></li>
             </ul>
+            <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
+              <li><a href="https://blog.dmarz.xyz/" target="_blank" rel="noopener noreferrer">🔗 blog</a></li>
+            </ul>
             {/* <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
               <li><a href="https://github.com/dmarzzz" target="_blank" rel="noopener noreferrer"> personal.html </a></li>
             </ul> */}
+          </li>
+          <li className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[95px] before:-left-3 before:w-3 before:h-[110px] border-white">
+            pulses/
+            <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
+              <li><a href="https://osscore.org/" target="_blank" rel="noopener noreferrer">🔗 github</a></li>
+            </ul>
+            <ul className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[3px] before:-left-3 before:w-3 before:h-4 border-white">
+              <li><a href="https://arxivp.ulse.info" target="_blank" rel="noopener noreferrer">🔗 arxiv</a></li>
+            </ul>
           </li>
           {/* <li className="relative before:border-l ml-4 before:mr-4 before:border-b before:absolute before:-top-[83px] before:-left-3 before:w-3 before:h-[95px] border-white">
           <a href="https://en.wikipedia.org/wiki/Fl%C3%A2neur">flânerie/</a>
